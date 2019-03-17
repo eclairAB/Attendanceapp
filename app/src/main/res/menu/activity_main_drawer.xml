@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_dashboard"
+            android:icon="@drawable/ic_dashboard_24dp"
+            android:title="Dashboard"
+            tools:ignore="HardcodedText" />
+        <item
+            android:id="@+id/nav_students"
+            android:icon="@drawable/ic_students"
+            android:title="Students"
+            tools:ignore="HardcodedText" />
+        <item
+            android:id="@+id/nav_subjects"
+            android:icon="@drawable/ic_subject"
+            android:title="Subjects"
+            tools:ignore="HardcodedText" />
+        <item
+            android:id="@+id/nav_sections"
+            android:icon="@drawable/ic_section"
+            android:title="Sections"
+            tools:ignore="HardcodedText" />
+        <item
+            android:id="@+id/nav_schedules"
+            android:icon="@drawable/ic_schedule"
+            android:title="Schedules"
+            tools:ignore="HardcodedText" />
+        <item
+            android:id="@+id/nav_rooms"
+            android:icon="@drawable/ic_rooms"
+            android:title="Rooms"
+            tools:ignore="HardcodedText" />
+    </group>
+
+    <item android:title="Add new"
+        tools:ignore="HardcodedText">
+        <menu>
+            <item
+                android:id="@+id/add_student"
+                android:icon="@drawable/ic_add"
+                android:title="Student" />
+            <item
+                android:id="@+id/add_subject"
+                android:icon="@drawable/ic_add"
+                android:title="Subject" />
+            <item
+                android:id="@+id/add_section"
+                android:icon="@drawable/ic_add"
+                android:title="Section" />
+            <item
+                android:id="@+id/add_schedule"
+                android:icon="@drawable/ic_add"
+                android:title="Schedule" />
+            <item
+                android:id="@+id/add_room"
+                android:icon="@drawable/ic_add"
+                android:title="Room" />
+        </menu>
+    </item>
+
+</menu>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "716032364741",
+    "firebase_url": "https://attendance-app-mark.firebaseio.com",
+    "project_id": "attendance-app-mark",
+    "storage_bucket": "attendance-app-mark.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716032364741:android:20169aaf5ce2f8a2",
+        "android_client_info": {
+          "package_name": "com.example.benedict.attendanceapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716032364741-6abrv3l4qdnr6aqove3f23c373fl5e9f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.benedict.attendanceapp",
+            "certificate_hash": "36c478ec8b97c32cd6ef8342eb3dd89041a69e9d"
+          }
+        },
+        {
+          "client_id": "716032364741-0p4qq5eetpm2p5a997lvufa3c2hnm00u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF5FaVElEMuBbfQclqy6Ruo8GBOW1u9PI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "716032364741-0p4qq5eetpm2p5a997lvufa3c2hnm00u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
