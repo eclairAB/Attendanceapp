@@ -157,30 +157,30 @@ public class AddSchedule extends AppCompatActivity  implements TimePicker.Dialog
 
     @Override
     public void setTexts(String time) {
-        if(buttonID.equals("2131296405")) mondayStart.setText(time);
-        if(buttonID.equals("2131296404")) mondayEnd.setText(time);
+        if(buttonID.equals("2131296413")) mondayStart.setText(time);
+        if(buttonID.equals("2131296412")) mondayEnd.setText(time);
 
-        if(buttonID.equals("2131296515")) tuesdayStart.setText(time);
-        if(buttonID.equals("2131296514")) tuesdayEnd.setText(time);
+        if(buttonID.equals("2131296530")) tuesdayStart.setText(time);
+        if(buttonID.equals("2131296529")) tuesdayEnd.setText(time);
 
-        if(buttonID.equals("2131296536")) wednesdayStart.setText(time);
-        if(buttonID.equals("2131296535")) wednesdayEnd.setText(time);
+        if(buttonID.equals("2131296551")) wednesdayStart.setText(time);
+        if(buttonID.equals("2131296550")) wednesdayEnd.setText(time);
 
-        if(buttonID.equals("2131296500")) thursdayStart.setText(time);
-        if(buttonID.equals("2131296499")) thursdayEnd.setText(time);
+        if(buttonID.equals("2131296515")) thursdayStart.setText(time);
+        if(buttonID.equals("2131296514")) thursdayEnd.setText(time);
 
-        if(buttonID.equals("2131296358")) fridayStart.setText(time);
-        if(buttonID.equals("2131296357")) fridayEnd.setText(time);
+        if(buttonID.equals("2131296364")) fridayStart.setText(time);
+        if(buttonID.equals("2131296363")) fridayEnd.setText(time);
 
-        if(buttonID.equals("2131296436")) saturdayStart.setText(time);
-        if(buttonID.equals("2131296435")) saturdayEnd.setText(time);
+        if(buttonID.equals("2131296446")) saturdayStart.setText(time);
+        if(buttonID.equals("2131296445")) saturdayEnd.setText(time);
 //        Log.d("buttonID", "time: "+time);
     }
 
     public void getButton(Button button){
         buttonID = String.valueOf(button.getId());
         timePicker.show(getSupportFragmentManager(), "time picker");
-//        Log.d("buttonID", "buttonID: "+buttonID);
+        Log.d("buttonID", "buttonID: "+buttonID);
     }
 
     void hideComponent(){

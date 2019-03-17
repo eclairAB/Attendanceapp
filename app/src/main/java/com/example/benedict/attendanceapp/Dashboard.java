@@ -9,7 +9,6 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 
 public class Dashboard extends Fragment {
@@ -47,7 +46,7 @@ public class Dashboard extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(getActivity(), Calendar.class);
+                Intent i = new Intent(getActivity(), AttendanceCalendar.class);
                 startActivity(i);
             }
         });

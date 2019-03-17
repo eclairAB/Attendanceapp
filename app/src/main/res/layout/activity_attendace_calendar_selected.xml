@@ -5,30 +5,33 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AttendanceCalendar">
+    tools:context=".AttendaceCalendarSelected">
 
     <LinearLayout
-        android:background="@color/colorPrimary"
-        android:padding="15dp"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize">
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary"
+        android:padding="15dp">
 
         <TextView
+            android:id="@+id/selectedDateTxt"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:gravity="center"
-            android:text="Records"
+            android:text="DATE"
             tools:ignore="HardcodedText,RtlHardcoded" />
 
     </LinearLayout>
 
-    <CalendarView
-        android:id="@+id/calendarView"
+    <SearchView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:layout_height="wrap_content"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:entries="@array/sample_listItem"/>
 
 </LinearLayout>

@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Calendar"></activity>
+        <activity android:name=".AttendaceCalendarSelected"></activity>
+        <activity android:name=".AttendanceCalendar" />
         <activity android:name=".SelectedClassSchedule" />
         <activity android:name=".CheckAttendanceSectionList" />
         <activity android:name=".AddRoom" />

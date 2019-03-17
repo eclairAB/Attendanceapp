@@ -19,7 +19,7 @@
             android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/samle_listItem"/>
+            android:entries="@array/sample_listItem"/>
 
     </LinearLayout>
 
