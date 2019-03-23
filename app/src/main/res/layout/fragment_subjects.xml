@@ -12,6 +12,7 @@
 
         <SearchView
             android:id="@+id/searchView"
+            android:queryHint="Search subjects"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

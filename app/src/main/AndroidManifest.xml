@@ -16,7 +16,6 @@
         <activity android:name=".AttendanceCalendar" />
         <activity android:name=".SelectedClassSchedule" />
         <activity android:name=".CheckAttendanceSectionList" />
-        <activity android:name=".AddRoom" />
         <activity android:name=".AddSchedule" />
         <activity android:name=".AddStudent" />
         <activity android:name=".SelectedStudent" />

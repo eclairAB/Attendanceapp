@@ -14,10 +14,9 @@ import android.widget.Toast;
 
 public class AddSectionDialog extends AppCompatDialogFragment {
 
+    Global global = new Global();
     public SQLiteDatabase db;
     DatabaseHelper dh = null;
-
-    AddStudent addStudent;
 
     EditText tSection;
 
@@ -64,7 +63,7 @@ public class AddSectionDialog extends AppCompatDialogFragment {
     }
 
     void addSection(){
-        db.execSQL("insert into section (name) values('"+ tSection.getText().toString() +"')");
+        db.execSQL("insert into section (name) values('"+ global.filter(tSection) +"')");
         tSection.setText("");
         Toast.makeText(getActivity(), "Section added", Toast.LENGTH_SHORT).show();
     }

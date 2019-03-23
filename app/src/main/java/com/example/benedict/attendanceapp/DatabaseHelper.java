@@ -95,6 +95,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+
+    // ************************************************* populate fields ********************************************************
+
     Cursor getStudent(String text){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("select * from student where fname like '%"+text+"%' or lname like '%"+text+"%' or fullname like '%"+text+"%' order by fullname asc",null);
@@ -104,6 +107,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("select name from section order by name asc",null);
     } // data source for section AutoCompleteTextView
+
+
+    // ************************************************* existence checks ********************************************************
+
 
     Boolean isStudentExisting(String name){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -127,11 +134,44 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     } // returns true if section is already existing
 
+    Boolean isRoomExisting(String room){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("select name from room where name = '" + room + "'",null);
+        if(data.getCount() == 0){
+            return false;
+        }
+        else {
+            return true;
+        }
+    } // returns true if room is already existing
+
+    Boolean isSubjectExisting(String subject){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("select title from subjects where title = '" + subject + "'",null);
+        if(data.getCount() == 0){
+            return false;
+        }
+        else {
+            return true;
+        }
+    } // returns true if subject is already existing
+
+
+    // ************************************************* inserts ********************************************************
+
+
+
+    // ************************************************* deletes ********************************************************
+
 
     void deleteStudent(String index){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("delete from student where id = '"+ index +"'");
     }
+
+
+    // ************************************************* updates ********************************************************
+
 
     void updateInfo(String index,    String fullname,   String fname, String lname,   String contact,
                     String guardian, String guardianno, String year,  String section, String status){
