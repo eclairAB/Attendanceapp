@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.add_schedule:
-                Intent intent4 = new Intent(this,AddSchedule.class);
+                Intent intent4 = new Intent(this,AddScheduleList.class);
                 startActivity(intent4);
                 break;
 

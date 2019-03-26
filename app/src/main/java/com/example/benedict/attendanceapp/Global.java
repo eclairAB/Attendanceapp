@@ -1,6 +1,7 @@
 package com.example.benedict.attendanceapp;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -27,6 +28,17 @@ class Global {
 
         return editText.getText().toString().trim();
     } // trims edit texts
+
+
+
+    String getSVquery(SearchView searchView){
+
+        String text = searchView.getQuery().toString().trim();
+
+        if (text.contains("'")) text = text.replace("'","''");
+        return text;
+    } // trims, and duplicates single quote on edit texts for query purposes
+
 
 
     String getSpinner(Spinner spinner){

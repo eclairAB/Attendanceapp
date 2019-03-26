@@ -37,7 +37,7 @@ public class AttendanceCalendar extends AppCompatActivity {
 
                 if(isNotAheadThanToday(year, month, dayOfMonth)){
 
-                    Intent i = new Intent(AttendanceCalendar.this, AttendaceCalendarSelected.class);
+                    Intent i = new Intent(AttendanceCalendar.this, AttendanceCalendarSelected.class);
 
                     incrementedMonth = month + 1;
                     if(incrementedMonth < 10) {

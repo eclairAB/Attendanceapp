@@ -1,21 +1,33 @@
 package com.example.benedict.attendanceapp;
 
-import android.annotation.SuppressLint;
-import android.app.TimePickerDialog;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class AddSchedule extends AppCompatActivity  implements TimePicker.DialogListener{
 
+    public SQLiteDatabase db;
+    DatabaseHelper dh = new DatabaseHelper(this);
+    Global global = new Global();
+
     String buttonID;
 
+    AutoCompleteTextView t_Subject, t_Room;
+
+    TextView sectionName;
     CheckBox cMonday, cTuesday, cWednesday, cThursday, cFriday, cSaturday;
     LinearLayout mondayLayout2, tuesdayLayout2, wednesdayLayout2, thursdayLayout2, fridayLayout2, saturdayLayout2;
 
@@ -34,19 +46,34 @@ public class AddSchedule extends AppCompatActivity  implements TimePicker.Dialog
 
     TimePicker timePicker = new TimePicker();
 
-    Global global = new Global();
+    ArrayList<String> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_schedule);
 
+        db = dh.getWritableDatabase();
+
         initializeComponents();
         hideComponent();
         listeners();
     }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+        populateRoom();
+        populateSubject();
+    }
+
     void initializeComponents(){
+        sectionName = findViewById(R.id.section);   sectionName.setText(getIntent().getExtras().getString("section"));
+
+        t_Subject = findViewById(R.id.txtSubject);
+        t_Room = findViewById(R.id.txtRoom);
+
         cMonday = findViewById(R.id.cMonday);
         cTuesday = findViewById(R.id.cTuesday);
         cWednesday = findViewById(R.id.cWednesday);
@@ -193,15 +220,44 @@ public class AddSchedule extends AppCompatActivity  implements TimePicker.Dialog
     }
 
 
+    public void populateSubject(){
+
+        try {
+            list.clear();
+            Cursor dataSource = dh.autoFillSubjectI();
+            while (dataSource.moveToNext()) {
+                list.add(dataSource.getString(0));
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
+                t_Subject.setAdapter(arrayAdapter);
+            }
+        }
+        catch (Exception e){
+            Log.d("apperror",e.toString());
+        }
+
+    }
+
+    public void populateRoom(){
+
+        try {
+            list.clear();
+            Cursor dataSource = dh.autoFillRoom();
+            while (dataSource.moveToNext()) {
+                list.add(dataSource.getString(0));
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
+                t_Room.setAdapter(arrayAdapter);
+            }
+        }
+        catch (Exception e){
+            Log.d("apperror",e.toString());
+        }
+
+    }
+
 
     public void addSubject(View view) {
         AddSubjectDialog addSubjectDialog = new AddSubjectDialog();
         addSubjectDialog.show(getSupportFragmentManager(), "add subject dialog");
-    }
-
-    public void addSection(View view) {
-        AddSectionDialog addSectionDialog = new AddSectionDialog();
-        addSectionDialog.show(getSupportFragmentManager(), "add section dialog");
     }
 
     public void addRoom(View view) {
@@ -210,33 +266,63 @@ public class AddSchedule extends AppCompatActivity  implements TimePicker.Dialog
     }
 
     public void monday(View view) {
-        if(cMonday.isChecked()) mondayLayout2.setVisibility(View.VISIBLE);
-        else  mondayLayout2.setVisibility(View.INVISIBLE);
+        if(cMonday.isChecked()) {
+            mondayLayout2.setVisibility(View.VISIBLE);
+        } else {
+            mondayLayout2.setVisibility(View.INVISIBLE);
+            mondayStart.setText("Start");
+            mondayEnd.setText("End");
+        }
     }
 
     public void tuesday(View view) {
-        if(cTuesday.isChecked()) tuesdayLayout2.setVisibility(View.VISIBLE);
-        else  tuesdayLayout2.setVisibility(View.INVISIBLE);
+        if(cTuesday.isChecked()) {
+            tuesdayLayout2.setVisibility(View.VISIBLE);
+        } else {
+            tuesdayLayout2.setVisibility(View.INVISIBLE);
+            tuesdayStart.setText("Start");
+            tuesdayEnd.setText("End");
+        }
     }
 
     public void wednesday(View view) {
-        if(cWednesday.isChecked()) wednesdayLayout2.setVisibility(View.VISIBLE);
-        else  wednesdayLayout2.setVisibility(View.INVISIBLE);
+        if(cWednesday.isChecked()) {
+            wednesdayLayout2.setVisibility(View.VISIBLE);
+        } else {
+            wednesdayLayout2.setVisibility(View.INVISIBLE);
+            wednesdayStart.setText("Start");
+            wednesdayEnd.setText("End");
+        }
     }
 
     public void thursday(View view) {
-        if(cThursday.isChecked()) thursdayLayout2.setVisibility(View.VISIBLE);
-        else  thursdayLayout2.setVisibility(View.INVISIBLE);
+        if(cThursday.isChecked()) {
+            thursdayLayout2.setVisibility(View.VISIBLE);
+        } else {
+            thursdayLayout2.setVisibility(View.INVISIBLE);
+            thursdayStart.setText("Start");
+            thursdayEnd.setText("End");
+        }
     }
 
     public void friday(View view) {
-        if(cFriday.isChecked()) fridayLayout2.setVisibility(View.VISIBLE);
-        else  fridayLayout2.setVisibility(View.INVISIBLE);
+        if(cFriday.isChecked()) {
+            fridayLayout2.setVisibility(View.VISIBLE);
+        } else {
+            fridayLayout2.setVisibility(View.INVISIBLE);
+            fridayStart.setText("Start");
+            fridayEnd.setText("End");
+        }
     }
 
     public void saturday(View view) {
-        if(cSaturday.isChecked()) saturdayLayout2.setVisibility(View.VISIBLE);
-        else  saturdayLayout2.setVisibility(View.INVISIBLE);
+        if(cSaturday.isChecked()) {
+            saturdayLayout2.setVisibility(View.VISIBLE);
+        } else {
+            saturdayLayout2.setVisibility(View.INVISIBLE);
+            saturdayStart.setText("Start");
+            saturdayEnd.setText("End");
+        }
     }
 
 
