@@ -75,7 +75,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 sqLiteDatabase.execSQL("create table if not exists schedule(" +
                         "'id' integer primary key autoincrement, " +
                         "'section_id' integer, " +
-                        "'subject')");
+                        "'subject' text)");
 
                         sqLiteDatabase.execSQL("create table if not exists schedule_time(" +
                                 "'id' integer primary key autoincrement, " +
@@ -133,7 +133,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     Cursor getSectionII(String text){
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("select distinct name from section where name like '%" + text + "%' and id != (select section_id from schedule group by subject having count(distinct section_id)>0) order by name asc",null);
+        Cursor sectionName = db.rawQuery("select distinct name from section where name like '%" + text + "%' and id != (select section_id from schedule group by subject having count(distinct section_id)>0) order by name asc",null);
+
+        if(sectionName.getCount() != 0){
+            return  sectionName;
+        }
+        else {
+            return db.rawQuery("select distinct name from section where name like '%" + text + "%' ",null);
+        }
     } // populating SectionList.java listView and search usage (returns all section without existing schedule)
 
 
@@ -161,7 +168,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     Cursor autoFillSubjectI(){
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("select distinct title from subjects where title != (select subject from schedule group by subject having count(distinct subject)>0) order by title asc",null);
+        Cursor subjects = db.rawQuery("select distinct title from subjects where title != (select subject from schedule group by subject having count(distinct subject)>0) order by title asc",null);
+
+        if(subjects.getCount() != 0){
+            return  subjects;
+        }
+        else {
+            return db.rawQuery("select distinct title from subjects order by title asc",null);
+        }
     } // data source for section AutoCompleteTextView
 
     Cursor autoFillRoomI(){
@@ -219,6 +233,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     // ************************************************* inserts ********************************************************
+
+    void insertSchedule_time(Integer schedule_id, String day, String room, String start_time, String end_time) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.execSQL("insert into schedule_time('schedule_id', 'day', 'room', 'start_time', 'end_time') values("+
+                "'" + schedule_id + "', " +
+                "'" + day + "', " +
+                "'" + room + "', " +
+                "'" + start_time + "', " +
+                "'" + end_time + "')");
+    }
 
 
     // ************************************************* deletes ********************************************************

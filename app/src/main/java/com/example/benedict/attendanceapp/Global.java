@@ -8,7 +8,7 @@ import android.widget.TextView;
 class Global {
 
 
-    void textviewToEditText(TextView textView, EditText editText){
+    void textViewToEditText(TextView textView, EditText editText){
         editText.setText(textView.getText().toString().trim());
     }
 
@@ -29,6 +29,14 @@ class Global {
         return editText.getText().toString().trim();
     } // trims edit texts
 
+
+    String filterTextView(TextView textView){
+
+        String text = textView.getText().toString().trim();
+
+        if (text.contains("'")) text = text.replace("'","''");
+        return text;
+    } // trims, and duplicates single quote on edit texts for query purposes
 
 
     String getSVquery(SearchView searchView){
@@ -69,7 +77,7 @@ class Global {
     } // returns true if edit texts contain digits
 
 
-    String setButtonText(String text){
-        return text;
+    String getButtonText(Button button){
+        return button.getText().toString().trim();
     }
 }

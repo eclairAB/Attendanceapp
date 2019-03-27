@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -326,4 +327,61 @@ public class AddSchedule extends AppCompatActivity  implements TimePicker.Dialog
     }
 
 
+    void save(){
+        Integer id;
+
+        Cursor getId = db.rawQuery("select max(id) as id from section",null); // set schedule_id for schedule_time table
+        getId.moveToFirst();
+
+        id = getId.getColumnIndex("id") + 1;
+        getId.close();
+
+        insertSchedule();
+
+        if (cMonday.isChecked()) dh.insertSchedule_time(id, "Monday", global.filter(t_Room),
+                global.getButtonText(mondayStart), global.getButtonText(mondayEnd));
+
+        if (cTuesday.isChecked()) dh.insertSchedule_time(id, "Tuesday", global.filter(t_Room),
+                global.getButtonText(tuesdayStart), global.getButtonText(tuesdayEnd));
+
+        if(cWednesday.isChecked()) dh.insertSchedule_time(id, "Wednesday", global.filter(t_Room),
+                global.getButtonText(wednesdayStart), global.getButtonText(wednesdayEnd));
+
+        if(cThursday.isChecked()) dh.insertSchedule_time(id, "Thursday", global.filter(t_Room),
+                global.getButtonText(thursdayStart), global.getButtonText(thursdayEnd));
+
+        if(cFriday.isChecked()) dh.insertSchedule_time(id, "Friday", global.filter(t_Room),
+                global.getButtonText(fridayStart), global.getButtonText(fridayEnd));
+
+        if(cSaturday.isChecked()) dh.insertSchedule_time(id, "Saturday", global.filter(t_Room),
+                global.getButtonText(saturdayStart), global.getButtonText(saturdayEnd));
+    }
+
+    public void insertSchedule() {
+        db.execSQL("insert into schedule('section_id', 'subject') values("+
+                "'" + global.filterTextView(sectionName) + "', " +
+                "'" + global.filter(t_Subject) + "')");
+
+    }
+
+
+    public void saveClick(View view) {
+
+        try {
+            if (global.filter(t_Room).equals("") || global.filter(t_Subject).equals("")) {
+
+                Toast.makeText(this, "Please indicate the room and the subject of this schedule", Toast.LENGTH_SHORT).show();
+            } else {
+                if (cMonday.isChecked() || cTuesday.isChecked() || cWednesday.isChecked() ||
+                        cThursday.isChecked() || cFriday.isChecked() || cSaturday.isChecked()) {
+
+                    Toast.makeText(this, "No day selected. Please add at least one item for the schedule", Toast.LENGTH_SHORT).show();
+                } else {
+                    save();
+                }
+            }
+        } catch (Exception e) {
+            Log.d("apperr", "saveClick: "+e);
+        }
+    }
 }

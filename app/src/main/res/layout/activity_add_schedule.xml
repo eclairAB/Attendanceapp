@@ -28,7 +28,7 @@
             android:text="Add schedule"/>
 
         <ImageView
-            android:onClick="save"
+            android:onClick="saveClick"
             android:layout_weight="1"
             android:layout_marginEnd="8dp"
             android:layout_gravity="center"

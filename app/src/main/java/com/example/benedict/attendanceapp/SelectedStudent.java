@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -98,13 +97,13 @@ public class SelectedStudent extends AppCompatActivity {
         if(global.getTextView_unfiltered(status).equals("Transferee")) arrayindex = 1;
         if(global.getTextView_unfiltered(status).equals("New student")) arrayindex = 2;
 
-        global.textviewToEditText(fname, t_fname);
-        global.textviewToEditText(lname, t_lname);
-        global.textviewToEditText(contact, t_contact);
-        global.textviewToEditText(guardian, t_guardian);
-        global.textviewToEditText(guardian_contact, t_guardian_contact);
-        global.textviewToEditText(year, t_year);
-        global.textviewToEditText(section, t_section);
+        global.textViewToEditText(fname, t_fname);
+        global.textViewToEditText(lname, t_lname);
+        global.textViewToEditText(contact, t_contact);
+        global.textViewToEditText(guardian, t_guardian);
+        global.textViewToEditText(guardian_contact, t_guardian_contact);
+        global.textViewToEditText(year, t_year);
+        global.textViewToEditText(section, t_section);
         s_status.setSelection(arrayindex);
     }
 
