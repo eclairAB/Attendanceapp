@@ -81,7 +81,7 @@ public class SectionList extends AppCompatDialogFragment implements SearchView.O
             } else {
                 listView.setEnabled(true);
                 while (data.moveToNext()) {
-                    list.add(data.getString(0));
+                    list.add(data.getString(1));
                     ListAdapter listAdapter = new ArrayAdapter<>(Objects.requireNonNull(this.getContext()), android.R.layout.simple_list_item_1, list);
                     listView.setAdapter(listAdapter);
                 }

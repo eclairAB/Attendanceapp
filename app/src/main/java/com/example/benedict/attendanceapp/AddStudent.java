@@ -9,17 +9,14 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class AddStudent extends AppCompatActivity {
@@ -133,9 +130,9 @@ public class AddStudent extends AppCompatActivity {
                 "'" + global.filter(t_contact) + "', " +
                 "'" + global.filter(t_guardian) + "', " +
                 "'" + global.filter(t_guardian_contact) + "', " +
-                "'" + global.filter(t_year) + "', " +
                 "'" + global.filter(t_section) + "', " +
-                "'" + global.getSpinner(t_status) + "')");
+                "'" + global.filter(t_year) + "', " +
+                "'" + global.getSpinner_filtered(t_status) + "')");
 
                 clear();
 
@@ -178,7 +175,7 @@ public class AddStudent extends AppCompatActivity {
         }
         else {
             try {
-                String fullname = "" + global.w_out_filter(t_fname) + " " + global.w_out_filter(t_lname);
+                String fullname = "" + global.getEditText_unfiltered(t_fname) + " " + global.getEditText_unfiltered(t_lname);
 
                 if (dh.isStudentExisting(fullname)) {
 

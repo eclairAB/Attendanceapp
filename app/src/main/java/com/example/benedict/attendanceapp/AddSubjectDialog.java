@@ -40,7 +40,7 @@ public class AddSubjectDialog extends AppCompatDialogFragment {
         view.findViewById(R.id.save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(global.w_out_filter(tSubject).equals("") || global.w_out_filter(tUnit).equals("")){
+                if(global.getEditText_unfiltered(tSubject).equals("") || global.getEditText_unfiltered(tUnit).equals("")){
                     Toast.makeText(getActivity(), "Please fill out the fields", Toast.LENGTH_SHORT).show();
                 }
                 else if(dh.isSubjectExisting(tSubject.getText().toString())){

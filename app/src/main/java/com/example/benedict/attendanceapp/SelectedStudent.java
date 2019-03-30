@@ -25,7 +25,7 @@ public class SelectedStudent extends AppCompatActivity {
 
     LinearLayout display_show, display_edit;
     String index;
-    TextView studentname;
+    TextView studentName;
     TextView fname, lname, contact, guardian, guardian_contact, year, section, status;
     EditText t_fname, t_lname, t_contact, t_guardian, t_guardian_contact, t_year, t_section;
     Spinner s_status;
@@ -51,7 +51,7 @@ public class SelectedStudent extends AppCompatActivity {
         display_show = findViewById(R.id.data_view);
         display_edit = findViewById(R.id.data_edit);
 
-        studentname = findViewById(R.id.student_name);              index = getIntent().getExtras().getString("val");
+        studentName = findViewById(R.id.student_name);              index = getIntent().getExtras().getString("val");
         fname = findViewById(R.id.fname);
         lname = findViewById(R.id.lname);
         contact = findViewById(R.id.contact);
@@ -78,7 +78,7 @@ public class SelectedStudent extends AppCompatActivity {
         Cursor getName = db.rawQuery("select * from student where id = '"+ index +"'",null);
         getName.moveToFirst();
 
-        studentname.setText(getName.getString(getName.getColumnIndex("fullname")));
+        studentName.setText(getName.getString(getName.getColumnIndex("fullname")));
         fname.setText(getName.getString(getName.getColumnIndex("fname")));
         lname.setText(getName.getString(getName.getColumnIndex("lname")));
         contact.setText(getName.getString(getName.getColumnIndex("contactno")));
@@ -141,7 +141,7 @@ public class SelectedStudent extends AppCompatActivity {
             final AlertDialog.Builder builder = new AlertDialog.Builder(SelectedStudent.this);
             builder.setCancelable(false);
             builder.setTitle("");
-            builder.setMessage("Are you sure you want to update records of "+studentname.getText()+"?");
+            builder.setMessage("Are you sure you want to update records of "+ studentName.getText()+"?");
             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -178,7 +178,7 @@ public class SelectedStudent extends AppCompatActivity {
             final AlertDialog.Builder builder = new AlertDialog.Builder(SelectedStudent.this);
             builder.setCancelable(false);
             builder.setTitle("");
-            builder.setMessage("Are you sure you want to remove records of "+studentname.getText()+"?");
+            builder.setMessage("Are you sure you want to remove records of "+ studentName.getText()+"?");
             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {

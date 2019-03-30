@@ -39,7 +39,7 @@ public class AddRoomDialog extends AppCompatDialogFragment {
         view.findViewById(R.id.save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(global.w_out_filter(tRoom).equals("")){
+                if(global.getEditText_unfiltered(tRoom).equals("")){
                     Toast.makeText(getActivity(), "Please fill out the field", Toast.LENGTH_SHORT).show();
                 }
                 else if(dh.isRoomExisting(global.filter(tRoom))){

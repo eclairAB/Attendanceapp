@@ -12,6 +12,10 @@ class Global {
         editText.setText(textView.getText().toString().trim());
     }
 
+    String getTextView_filtered(TextView textView){
+        return textView.getText().toString().trim();
+    }
+
     String getTextView_unfiltered(TextView textView){
         return textView.getText().toString().trim();
     }
@@ -24,7 +28,7 @@ class Global {
         return text;
     } // trims, and duplicates single quote on edit texts for query purposes
 
-    String w_out_filter(EditText editText){
+    String getEditText_unfiltered(EditText editText){
 
         return editText.getText().toString().trim();
     } // trims edit texts
@@ -49,12 +53,12 @@ class Global {
 
 
 
-    String getSpinner(Spinner spinner){
+    String getSpinner_filtered(Spinner spinner){
 
         return spinner.getSelectedItem().toString().trim().replace("'", "''");
     } // trims and filters spinners
 
-    String w_out_filter_spinner(Spinner spinner){
+    String getSpinner_unfiltered(Spinner spinner){
 
         return spinner.getSelectedItem().toString().trim();
     } // trims spinner

@@ -64,7 +64,7 @@ public class AddScheduleList extends AppCompatActivity implements SearchView.OnQ
         try {
             list.clear();
 
-            Cursor data = dh.getSection(global.getSVquery(searchView));
+            Cursor data = dh.getSectionI(global.getSVquery(searchView));
             if (data.getCount() == 0) {
                 listView.setEnabled(false);
                 String[] blank = {"No data to be shown"};
@@ -73,7 +73,7 @@ public class AddScheduleList extends AppCompatActivity implements SearchView.OnQ
             } else {
                 listView.setEnabled(true);
                 while (data.moveToNext()) {
-                    list.add(data.getString(0));
+                    list.add(data.getString(1));
                     ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
                     listView.setAdapter(listAdapter);
                 }

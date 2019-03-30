@@ -1,5 +1,7 @@
 package com.example.benedict.attendanceapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -327,6 +329,46 @@ public class AddSchedule extends AppCompatActivity  implements TimePicker.Dialog
     }
 
 
+    public void saveClick(View view) {
+
+        try {
+            if (global.filter(t_Room).equals("") || global.filter(t_Subject).equals("")) {
+
+                Toast.makeText(this, "Please indicate the room and the subject of this schedule", Toast.LENGTH_SHORT).show();
+            } else {
+                if (!cMonday.isChecked() && !cTuesday.isChecked() && !cWednesday.isChecked() &&
+                        !cThursday.isChecked() && !cFriday.isChecked() && !cSaturday.isChecked()) {
+
+                    Toast.makeText(this, "No day selected. Please add at least one item for the schedule", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(AddSchedule.this);
+                    builder.setCancelable(false);
+                    builder.setTitle("");
+                    builder.setMessage("Confirm adding schedule for the section "+global.getTextView_unfiltered(sectionName)+"?");
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            save();
+                            Toast.makeText(AddSchedule.this, "Schedule added", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    });
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+                    builder.create().show();
+                }
+            }
+        } catch (Exception e) {
+            Log.d("apperr", "saveClick: "+e);
+        }
+    }
+
     void save(){
         Integer id;
 
@@ -359,29 +401,9 @@ public class AddSchedule extends AppCompatActivity  implements TimePicker.Dialog
 
     public void insertSchedule() {
         db.execSQL("insert into schedule('section_id', 'subject') values("+
-                "'" + global.filterTextView(sectionName) + "', " +
+                "'" + global.getTextView_filtered(sectionName) + "', " +
                 "'" + global.filter(t_Subject) + "')");
 
     }
 
-
-    public void saveClick(View view) {
-
-        try {
-            if (global.filter(t_Room).equals("") || global.filter(t_Subject).equals("")) {
-
-                Toast.makeText(this, "Please indicate the room and the subject of this schedule", Toast.LENGTH_SHORT).show();
-            } else {
-                if (cMonday.isChecked() || cTuesday.isChecked() || cWednesday.isChecked() ||
-                        cThursday.isChecked() || cFriday.isChecked() || cSaturday.isChecked()) {
-
-                    Toast.makeText(this, "No day selected. Please add at least one item for the schedule", Toast.LENGTH_SHORT).show();
-                } else {
-                    save();
-                }
-            }
-        } catch (Exception e) {
-            Log.d("apperr", "saveClick: "+e);
-        }
-    }
 }

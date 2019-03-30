@@ -74,7 +74,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 sqLiteDatabase.execSQL("create table if not exists schedule(" +
                         "'id' integer primary key autoincrement, " +
-                        "'section_id' integer, " +
+                        "'section_name' text, " +
                         "'subject' text)");
 
                         sqLiteDatabase.execSQL("create table if not exists schedule_time(" +
@@ -106,6 +106,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("drop table if exists subjects");
         sqLiteDatabase.execSQL("drop table if exists section");
         sqLiteDatabase.execSQL("drop table if exists schedule");
+        sqLiteDatabase.execSQL("drop table if exists schedule_time");
         sqLiteDatabase.execSQL("drop table if exists room");
         sqLiteDatabase.execSQL("drop table if exists attendance_days");
         sqLiteDatabase.execSQL("drop table if exists attendance_students");
@@ -126,21 +127,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.rawQuery("select * from subjects where title like '%"+text+"%' order by title asc",null);
     } // populating student listView and search usage
 
-    Cursor getSection(String text){
+    Cursor getSectionI(String text){
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("select distinct name from section where name like '%" + text + "%' and id = (select section_id from schedule group by subject having count(distinct section_id)>0) order by name asc",null);
+        return db.rawQuery("select distinct section_name from schedule where section_name like '%" + text + "%' having count(section_name)>0 order by section_name asc",null);
     } // populating section listView and search usage
 
     Cursor getSectionII(String text){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor sectionName = db.rawQuery("select distinct name from section where name like '%" + text + "%' and id != (select section_id from schedule group by subject having count(distinct section_id)>0) order by name asc",null);
+        return db.rawQuery("select name from section where name like '%" + text + "%' and id != (select section_id from schedule group by subject having count(distinct section_id)>0) order by name asc",null);
 
-        if(sectionName.getCount() != 0){
+        /*if(sectionName.getCount() != 0){
             return  sectionName;
         }
         else {
-            return db.rawQuery("select distinct name from section where name like '%" + text + "%' ",null);
-        }
+            return db.rawQuery("select * from section where name like '%" + text + "%' ",null);
+        }*/
     } // populating SectionList.java listView and search usage (returns all section without existing schedule)
 
 
