@@ -129,12 +129,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     Cursor getSectionI(String text){
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("select distinct section_name from schedule where section_name like '%" + text + "%' having count(section_name)>0 order by section_name asc",null);
+        return db.rawQuery("select distinct section_name from schedule where section_name like '%" + text + "%' group by section_name having count(section_name)>0 order by section_name asc",null);
     } // populating section listView and search usage
 
     Cursor getSectionII(String text){
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("select name from section where name like '%" + text + "%' and id != (select section_id from schedule group by subject having count(distinct section_id)>0) order by name asc",null);
+        return db.rawQuery("select distinct name from section where name like '%" + text + "%' and not exists \n" +
+                "(select section_name from schedule where section_name = section.name) order by name asc",null);
 
         /*if(sectionName.getCount() != 0){
             return  sectionName;

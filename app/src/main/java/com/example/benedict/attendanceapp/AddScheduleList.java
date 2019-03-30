@@ -73,7 +73,7 @@ public class AddScheduleList extends AppCompatActivity implements SearchView.OnQ
             } else {
                 listView.setEnabled(true);
                 while (data.moveToNext()) {
-                    list.add(data.getString(1));
+                    list.add(data.getString(0));
                     ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
                     listView.setAdapter(listAdapter);
                 }

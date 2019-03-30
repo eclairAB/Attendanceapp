@@ -400,7 +400,7 @@ public class AddSchedule extends AppCompatActivity  implements TimePicker.Dialog
     }
 
     public void insertSchedule() {
-        db.execSQL("insert into schedule('section_id', 'subject') values("+
+        db.execSQL("insert into schedule('section_name', 'subject') values("+
                 "'" + global.getTextView_filtered(sectionName) + "', " +
                 "'" + global.filter(t_Subject) + "')");
 
