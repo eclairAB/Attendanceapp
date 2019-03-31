@@ -46,7 +46,7 @@ public class SelectedClassSchedule extends AppCompatActivity {
         initializeComponent();
         listeners();
 
-        section.setText(Objects.requireNonNull(getIntent().getExtras()).getString("listitem"));
+        section.setText(Objects.requireNonNull(getIntent().getExtras()).getString("listItem"));
 
         populate();
     }

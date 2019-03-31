@@ -68,7 +68,6 @@
         android:id="@+id/listView"
         android:paddingLeft="15dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:entries="@array/sample_listItem"/>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

@@ -116,6 +116,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // ************************************************* populate fields ********************************************************
 
+    Cursor getScheduleForToday(String dateOfWeek){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("select distinct schedule.section_name from schedule inner join schedule_time on " +
+                               "schedule.id = schedule_time.schedule_id where schedule_time.day = '"+ dateOfWeek +"' " +
+                               "order by schedule_time.start_time asc", null);
+    }
+
 
     Cursor getStudent(String text){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -136,14 +143,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("select distinct name from section where name like '%" + text + "%' and not exists \n" +
                 "(select section_name from schedule where section_name = section.name) order by name asc",null);
-
-        /*if(sectionName.getCount() != 0){
-            return  sectionName;
-        }
-        else {
-            return db.rawQuery("select * from section where name like '%" + text + "%' ",null);
-        }*/
     } // populating SectionList.java listView and search usage (returns all section without existing schedule)
+
+    Cursor getSectionIII(String section, String date){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT DISTINCT subject FROM schedule where section_name = '"+ section +"' AND EXISTS \n" +
+                "(SELECT day FROM schedule_time where day = '"+ date +"')",null);
+    } // populating section listView and search usage
 
 
     Cursor autoFillSection(){
@@ -233,6 +239,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     } // returns true if subject is already existing
 
+
+    Boolean isMultipleSchedule(String section){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("select subject from schedule where section_name = '" + section + "'",null);
+        if(data.getCount() == 0){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
 
     // ************************************************* inserts ********************************************************
 

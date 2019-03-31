@@ -5,9 +5,12 @@
     android:layout_height="match_parent"
     android:padding="15dp">
 
-    <SearchView
-        android:id="@+id/searchView"
-        android:queryHint="Search sections"
+    <TextView
+        android:id="@+id/sectionText"
+        android:text="SECTION"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
