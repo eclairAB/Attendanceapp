@@ -143,7 +143,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("select distinct name from section where name like '%" + text + "%' and not exists \n" +
                 "(select section_name from schedule where section_name = section.name) order by name asc",null);
-    } // populating SectionList.java listView and search usage (returns all section without existing schedule)
+    } // populating SectionList.java listView and search usage (returns all section without existing s  chedule)
 
     Cursor getSectionIII(String section, String date){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -253,7 +253,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // ************************************************* inserts ********************************************************
 
-    void insertSchedule_time(Integer schedule_id, String day, String room, String start_time, String end_time) {
+    void insertSchedule_time(String schedule_id, String day, String room, String start_time, String end_time) {
         SQLiteDatabase db = getWritableDatabase();
 
         db.execSQL("insert into schedule_time('schedule_id', 'day', 'room', 'start_time', 'end_time') values("+

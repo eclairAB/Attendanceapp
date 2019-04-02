@@ -370,12 +370,12 @@ public class AddSchedule extends AppCompatActivity  implements TimePicker.Dialog
     }
 
     void save(){
-        Integer id;
+        String id;
 
-        Cursor getId = db.rawQuery("select max(id) as id from section",null); // set schedule_id for schedule_time table
+        Cursor getId = db.rawQuery("select id from schedule where section_name ='"+ global.getTextView_filtered(sectionName) +"'",null); // set schedule_id for schedule_time table
         getId.moveToFirst();
 
-        id = getId.getColumnIndex("id") + 1;
+        id = getId.getString(getId.getColumnIndex("id"));
         getId.close();
 
         insertSchedule();

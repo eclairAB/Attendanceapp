@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -34,7 +35,7 @@ public class AttendanceCheckMultipleItems extends AppCompatDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.fragment_section_list, null);
+        View view = inflater.inflate(R.layout.fragment_attendance_check_multiple, null);
 
         dh = new DatabaseHelper(this.getContext());
         db = dh.getWritableDatabase();
