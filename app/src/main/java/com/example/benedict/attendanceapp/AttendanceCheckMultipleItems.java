@@ -62,7 +62,8 @@ public class AttendanceCheckMultipleItems extends AppCompatDialogFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Intent i = new Intent(getContext(), SelectedClassSchedule.class);
-                i.putExtra("section", listView.getItemAtPosition(position).toString());
+                i.putExtra("subject", listView.getItemAtPosition(position).toString());
+                i.putExtra("section", textView.getText().toString());
                 startActivity(i);
             }
         });

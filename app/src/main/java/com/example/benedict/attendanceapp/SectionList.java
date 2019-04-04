@@ -61,6 +61,8 @@ public class SectionList extends AppCompatDialogFragment implements SearchView.O
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+//                long index = listView.getItemIdAtPosition(position);
+
                 Intent i = new Intent(getContext(), AddSchedule.class);
                 i.putExtra("section", listView.getItemAtPosition(position).toString());
                 startActivity(i);

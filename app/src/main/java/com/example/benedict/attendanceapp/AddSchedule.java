@@ -12,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,7 +48,8 @@ public class AddSchedule extends AppCompatActivity  implements TimePicker.Dialog
 
     TimePicker timePicker = new TimePicker();
 
-    ArrayList<String> list = new ArrayList<>();
+    ArrayList<String> autocompleteSubject = new ArrayList<>();
+    ArrayList<String> autocompleteRoom = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -226,11 +226,11 @@ public class AddSchedule extends AppCompatActivity  implements TimePicker.Dialog
     public void populateSubject(){
 
         try {
-            list.clear();
+            autocompleteSubject.clear();
             Cursor dataSource = dh.autoFillSubjectI();
             while (dataSource.moveToNext()) {
-                list.add(dataSource.getString(0));
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
+                autocompleteSubject.add(dataSource.getString(0));
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, autocompleteSubject);
                 t_Subject.setAdapter(arrayAdapter);
             }
         }
@@ -243,11 +243,11 @@ public class AddSchedule extends AppCompatActivity  implements TimePicker.Dialog
     public void populateRoom(){
 
         try {
-            list.clear();
+            autocompleteRoom.clear();
             Cursor dataSource = dh.autoFillRoom();
             while (dataSource.moveToNext()) {
-                list.add(dataSource.getString(0));
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
+                autocompleteRoom.add(dataSource.getString(0));
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, autocompleteRoom);
                 t_Room.setAdapter(arrayAdapter);
             }
         }
@@ -372,11 +372,13 @@ public class AddSchedule extends AppCompatActivity  implements TimePicker.Dialog
     void save(){
         String id;
 
-        Cursor getId = db.rawQuery("select id from schedule where section_name ='"+ global.getTextView_filtered(sectionName) +"'",null); // set schedule_id for schedule_time table
+        Cursor getId = db.rawQuery("select max(id)+1 as id from schedule ",null); // set schedule_id for schedule_time table
         getId.moveToFirst();
 
         id = getId.getString(getId.getColumnIndex("id"));
         getId.close();
+
+        if (id == null) id = "1";
 
         insertSchedule();
 

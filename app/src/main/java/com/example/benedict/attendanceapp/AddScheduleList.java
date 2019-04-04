@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -52,10 +53,12 @@ public class AddScheduleList extends AppCompatActivity implements SearchView.OnQ
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+//                long index = listView.getItemIdAtPosition(position);
+
                 Intent i = new Intent(getApplicationContext(), AddSchedule.class);
+//                i.putExtra("id_index", id_index.get((int) index));
                 i.putExtra("section",listView.getItemAtPosition(position).toString());
                 startActivity(i);
-
             }
         });
     }
@@ -87,7 +90,7 @@ public class AddScheduleList extends AppCompatActivity implements SearchView.OnQ
 
     public void add(View view) {
         SectionList sectionList = new SectionList();
-        sectionList.show(getSupportFragmentManager(), "section list dialog");
+        sectionList.show(getSupportFragmentManager(), "subject autocompleteSubject dialog");
     }
 
 

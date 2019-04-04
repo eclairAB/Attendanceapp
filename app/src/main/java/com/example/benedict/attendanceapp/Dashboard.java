@@ -26,9 +26,6 @@ public class Dashboard extends Fragment {
 
     CardView attendance, calendar, settings;
 
-    EditText queryBox;
-    Button btnExcute;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,9 +44,6 @@ public class Dashboard extends Fragment {
         attendance = view.findViewById(R.id.attendanceCard);
         calendar = view.findViewById(R.id.calendarCard);
         settings = view.findViewById(R.id.settingCard);
-
-        queryBox = view.findViewById(R.id.queryBox);
-        btnExcute = view.findViewById(R.id.execute);
     }
 
     void clickListeners(){
@@ -76,24 +70,6 @@ public class Dashboard extends Fragment {
             public void onClick(View v) {
 
 
-            }
-        });
-
-        btnExcute.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(global.getEditText_unfiltered(queryBox).contains("insert into")){
-
-                    db.execSQL(global.getEditText_unfiltered(queryBox));
-                    Toast.makeText(getActivity(), "command executed", Toast.LENGTH_SHORT).show();
-                    queryBox.setText("");
-                }
-                else {
-                    Cursor cursor = db.rawQuery(global.filter(queryBox), null);
-                    Log.d("cursor_output", String.valueOf(cursor));
-                    queryBox.setText("");
-                }
             }
         });
     }

@@ -128,27 +128,6 @@
 
             </android.support.v7.widget.CardView>
 
-            <LinearLayout
-                android:weightSum="10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/queryBox"
-                    android:layout_weight="3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <Button
-                    android:layout_weight="7"
-                    android:id="@+id/execute"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="execute"/>
-
-            </LinearLayout>
-
         </LinearLayout>
 
     </ScrollView>

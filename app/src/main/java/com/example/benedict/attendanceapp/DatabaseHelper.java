@@ -116,11 +116,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // ************************************************* populate fields ********************************************************
 
-    Cursor getScheduleForToday(String dateOfWeek){
+    Cursor getScheduleForToday(String dayOfWeek){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("select distinct schedule.section_name from schedule inner join schedule_time on " +
-                               "schedule.id = schedule_time.schedule_id where schedule_time.day = '"+ dateOfWeek +"' " +
+                               "schedule.id = schedule_time.schedule_id where schedule_time.day = '"+ dayOfWeek +"' " +
                                "order by schedule_time.start_time asc", null);
+    }
+
+    Cursor getStudentAttendance(String dayOfWeek, String section){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT student.fullname, student.guardianno FROM student " +
+                "INNER JOIN schedule ON student.section = schedule.section_name " +
+                "INNER JOIN schedule_time ON schedule.id = schedule_time.schedule_id " +
+                "WHERE schedule_time.day = '"+ dayOfWeek +"' AND section = '"+ section +"'", null);
     }
 
 
@@ -176,21 +184,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     Cursor autoFillSubjectI(){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor subjects = db.rawQuery("select distinct title from subjects where title != (select subject from schedule group by subject having count(distinct subject)>0) order by title asc",null);
-
-        if(subjects.getCount() != 0){
-            return  subjects;
-        }
-        else {
-            return db.rawQuery("select distinct title from subjects order by title asc",null);
-        }
-    } // data source for section AutoCompleteTextView
+        return db.rawQuery("select distinct title from subjects order by title asc",null);
+    } // data source for subject AutoCompleteTextView
 
     Cursor autoFillRoomI(){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("select name from room order by name asc",null);
     } // data source for section AutoCompleteTextView
 
+
+    Cursor getStudentSMS(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("",null);
+    }
 
     // ************************************************* existence checks ********************************************************
 
